@@ -29,7 +29,8 @@ local function greetCallback(cid, message)
 	end
 
 	if player:getStorageValue(Storage.DjinnWar.EfreetFaction.Mission01) < 1 then
-		npcHandler:setMessage(MESSAGE_GREET, 'You know the code human! Very well then... What do you want, |PLAYERNAME|?')
+		npcHandler:setMessage(MESSAGE_GREET, 'You know the code human! Very well then... \z
+		What do you want, |PLAYERNAME|?')
 	else
 		npcHandler:setMessage(MESSAGE_GREET, 'You are still alive, |PLAYERNAME|? Well, what do you want?')
 	end
@@ -63,11 +64,17 @@ local function creatureSayCallback(cid, type, msg)
 		if msgcontains(msg, 'yes') then
 			npcHandler:say({
 				'Well ... All right. You may only be a human, but you do seem to have the right spirit. ...',
-				'Listen! Since our base of operations is set in this isolated spot we depend on supplies from outside. These supplies are crucial for us to win the war. ...',
-				'Unfortunately, it has happened that some of our supplies have disappeared on their way to this fortress. At first we thought it was the Marid, but intelligence reports suggest a different explanation. ...',
+				'Listen! Since our base of operations is set in this isolated spot we depend on supplies \z
+				from outside. These supplies are crucial for us to win the war. ...',
+				'Unfortunately, it has happened that some of our supplies have disappeared on their way to \z
+				this fortress. At first we thought it was the Marid, but intelligence reports \z
+				suggest a different explanation. ...',
 				'We now believe that a human was behind the theft! ...',
-				'His identity is still unknown but we have been told that the thief fled to the human settlement called Carlin. I want you to find him and report back to me. Nobody messes with the Efreet and lives to tell the tale! ...',
-				'Now go! Travel to the northern city Carlin! Keep your eyes open and look around for something that might give you a clue!'
+				'His identity is still unknown but we have been told that the thief fled to the human settlement \z
+				called Carlin. I want you to find him and report back to me. Nobody messes with the \z
+				Efreet and lives to tell the tale! ...',
+				'Now go! Travel to the northern city Carlin! Keep your eyes open and look around for \z
+				something that might give you a clue!'
 			}, cid)
 			player:setStorageValue(Storage.DjinnWar.EfreetFaction.Start, 1)
 			player:setStorageValue(Storage.DjinnWar.EfreetFaction.Mission01, 1)
@@ -93,7 +100,8 @@ local function creatureSayCallback(cid, type, msg)
 				npcHandler:say('Hmmm... I don\'t think so. Return to Thais and continue your search!', cid)
 			else
 				npcHandler:say({
-					'You found the thief! Excellent work, soldier! You are doing well - for a human, that is. Here - take this as a reward. ...',
+					'You found the thief! Excellent work, soldier! You are doing well - for a human, that is. \z
+					Here - take this as a reward. ...',
 					'Since you have proven to be a capable soldier, we have another mission for you. ...',
 					'If you are interested go to Alesar and ask him about it.'
 				}, cid)
@@ -109,8 +117,12 @@ local function creatureSayCallback(cid, type, msg)
 	return true
 end
 
--- Greeting message
-keywordHandler:addGreetKeyword({"djanni'hah"}, {npcHandler = npcHandler, text = "What do you want from me, |PLAYERNAME|?"})
+keywordHandler:addGreetKeyword({"djanni'hah"}, 
+	{
+		npcHandler = npcHandler, 
+		text = "What do you want from me, |PLAYERNAME|?"
+	}
+)
 
 npcHandler:setMessage(MESSAGE_FAREWELL, 'Stand down, soldier!')
 

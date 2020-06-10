@@ -1,4 +1,3 @@
-
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
 NpcSystem.parseParameters(npcHandler)
@@ -15,6 +14,17 @@ end
 function onThink()
 	npcHandler:onThink()
 end
+
+local shopModule = ShopModule:new()
+npcHandler:addModule(shopModule)
+
+shopModule:addBuyableItem({'Broken Crossbow'}, 12407, 30)
+shopModule:addBuyableItem({'Minotaur Horn'}, 12428, 75)
+shopModule:addBuyableItem({'Piece of Archer Armor'}, 12439, 20)
+shopModule:addBuyableItem({'Piece of Warrior Armor'},  12438, 50)
+shopModule:addBuyableItem({'Purple Robe'}, 12429, 110)
+
+shopModule:addSellableItem({'Flask with Beaver Bait'}, 11100, 100)
 
 local config = {
 	{position = Position(32474, 31947, 7), type = 2, description = 'Tree 1'},
