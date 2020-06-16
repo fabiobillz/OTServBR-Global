@@ -47,7 +47,7 @@ local function addTravelKeyword(keyword, cost, destination)
 		{
 			npcHandler = npcHandler,
 			text = 'Do you want to sail ' .. keyword:titleCase() .. ' for |TRAVELCOST|?',
-			cost = cost, discount = 'postman'
+			cost = cost, discount = .Postman.
 		}
 	)
 	travelKeyword:addChildKeyword({'yes'}, StdModule.travel,
@@ -55,7 +55,7 @@ local function addTravelKeyword(keyword, cost, destination)
 			npcHandler = npcHandler,
 			premium = false,
 			cost = cost,
-			discount = 'postman',
+			discount = .Postman.,
 			destination = destination
 		}
 	)

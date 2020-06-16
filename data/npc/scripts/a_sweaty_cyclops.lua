@@ -133,7 +133,7 @@ local function creatureSayCallback(cid, type, msg)
 			end
 		elseif npcHandler.topic[cid] == 11 then
 			if player:removeItem(5880, 1) then
-				player:setStorageValue(Storage.hiddenCityOfBeregar.GearWheel, player:getStorageValue(Storage.hiddenCityOfBeregar.GearWheel) + 1)
+				player:setStorageValue(Storage.HiddenCityOfBeregar.GearWheel, player:getStorageValue(Storage.HiddenCityOfBeregar.GearWheel) + 1)
 				player:addItem(9690, 1)
 				npcHandler:say("Cling clang!", cid)
 				npcHandler.topic[cid] = 0
@@ -212,8 +212,8 @@ local function creatureSayCallback(cid, type, msg)
 			npcHandler.topic[cid] = 8
 		end
 	elseif msgcontains(msg, "gear wheel") then
-		if player:getStorageValue(Storage.hiddenCityOfBeregar.GoingDown) > 0 and 
-		player:getStorageValue(Storage.hiddenCityOfBeregar.GearWheel) > 3 then
+		if player:getStorageValue(Storage.HiddenCityOfBeregar.GoingDown) > 0 and 
+		player:getStorageValue(Storage.HiddenCityOfBeregar.GearWheel) > 3 then
 			npcHandler:say("Uh. Me can make some gear wheel from iron ores. Lil' one want to trade?", cid)
 			npcHandler.topic[cid] = 11
 		end

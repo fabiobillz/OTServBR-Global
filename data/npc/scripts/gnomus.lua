@@ -53,12 +53,12 @@ local function creatureSayCallback(cid, type, msg)
 
 	-- missão measurements
 	if msgcontains(msg, "measurements") and npcHandler.topic[cid] == 1 then
-		if player:getStorageValue(Storage.DangerousDepths.Gnomes.Measurements ) == 2 and player:getStorageValue(Storage.DangerousDepths.Gnomes.timeTaskMeasurements) > 0 then -- Ainda não se passaram as 20h
+		if player:getStorageValue(Storage.DangerousDepths.Gnomes.Measurements ) == 2 and player:getStorageValue(Storage.DangerousDepths.Gnomes.TimeTaskMeasurements) > 0 then -- Ainda não se passaram as 20h
 			npcHandler:say({"I don't need your help for now. Come back later."}, cid)
 			playerTopic[cid] = 1
 			npcHandler.topic[cid] = 1
 		end
-		if player:getStorageValue(Storage.DangerousDepths.Gnomes.Measurements) == 2 and player:getStorageValue(Storage.DangerousDepths.Gnomes.timeTaskMeasurements) <= 0 then -- Vai fazer a missão após 20h
+		if player:getStorageValue(Storage.DangerousDepths.Gnomes.Measurements) == 2 and player:getStorageValue(Storage.DangerousDepths.Gnomes.TimeTaskMeasurements) <= 0 then -- Vai fazer a missão após 20h
 			npcHandler:say({"The heat down here is not the only problem we have but one of our greatest concerns. Not only is it almost unbearable for us, it also seems to be rising. ...",
 							"We need to find out if this is true and what that means for this place - and for us gnomes. You can help us do this by grabbing one of our trignometres and collecting as much as data from the heat in this area as possible. ...",
 							"We'd need at least 5 measurements. Are you willing to do this?"}, cid)
@@ -71,14 +71,14 @@ local function creatureSayCallback(cid, type, msg)
 							"We'd need at least 5 measurements. Are you willing to do this?"}, cid)
 			playerTopic[cid] = 2
 			npcHandler.topic[cid] = 2
-		elseif (player:getStorageValue(Storage.DangerousDepths.Gnomes.Measurements) == 1) and (player:getStorageValue(Storage.DangerousDepths.Gnomes.locationCount) < 5) then -- Está na missão porém não terminou a task!
+		elseif (player:getStorageValue(Storage.DangerousDepths.Gnomes.Measurements) == 1) and (player:getStorageValue(Storage.DangerousDepths.Gnomes.LocationCount) < 5) then -- Está na missão porém não terminou a task!
 			npcHandler:say({"Come back when you have finished your job."}, cid)
 			playerTopic[cid] = 1
 			npcHandler.topic[cid] = 1
-		elseif player:getStorageValue(Storage.DangerousDepths.Gnomes.Measurements) == 1 and player:getStorageValue(Storage.DangerousDepths.Gnomes.locationCount) == 5 then -- Não possuía a missão, agora possui!
+		elseif player:getStorageValue(Storage.DangerousDepths.Gnomes.Measurements) == 1 and player:getStorageValue(Storage.DangerousDepths.Gnomes.LocationCount) == 5 then -- Não possuía a missão, agora possui!
 			npcHandler:say({"Excellent, you returned with more data! Let me see... hmm. ...",
 							"Well, we need more data on this but first I will have to show this to our grand horticulturist. Thank you for getting this for us!"}, cid)
-			player:setStorageValue(Storage.DangerousDepths.Gnomes.timeTaskMeasurements, os.time() + tempo)
+			player:setStorageValue(Storage.DangerousDepths.Gnomes.TimeTaskMeasurements, os.time() + tempo)
 			player:addItem(32014, 1)
 			player:setStorageValue(Storage.DangerousDepths.Gnomes.Status, player:getStorageValue(Storage.DangerousDepths.Gnomes.Status) + 1)
 			player:setStorageValue(Storage.DangerousDepths.Gnomes.Measurements, 2)
@@ -94,12 +94,12 @@ local function creatureSayCallback(cid, type, msg)
 		end
 		player:setStorageValue(Storage.DangerousDepths.Gnomes.Measurements, 1)
 		player:setStorageValue(Storage.DangerousDepths.Gnomes.GnomeChartChest, 1) -- Permissão para usar o baú
-		player:setStorageValue(Storage.DangerousDepths.Gnomes.locationCount, 0) -- Garantindo que a task não inicie com -1
-		player:setStorageValue(Storage.DangerousDepths.Gnomes.locationA, 0) -- Garantindo que a task não inicie com -1
-		player:setStorageValue(Storage.DangerousDepths.Gnomes.locationB, 0) -- Garantindo que a task não inicie com -1
-		player:setStorageValue(Storage.DangerousDepths.Gnomes.locationC, 0) -- Garantindo que a task não inicie com -1
-		player:setStorageValue(Storage.DangerousDepths.Gnomes.locationD, 0) -- Garantindo que a task não inicie com -1
-		player:setStorageValue(Storage.DangerousDepths.Gnomes.locationE, 0) -- Garantindo que a task não inicie com -1
+		player:setStorageValue(Storage.DangerousDepths.Gnomes.LocationCount, 0) -- Garantindo que a task não inicie com -1
+		player:setStorageValue(Storage.DangerousDepths.Gnomes.LocationA, 0) -- Garantindo que a task não inicie com -1
+		player:setStorageValue(Storage.DangerousDepths.Gnomes.LocationB, 0) -- Garantindo que a task não inicie com -1
+		player:setStorageValue(Storage.DangerousDepths.Gnomes.LocationC, 0) -- Garantindo que a task não inicie com -1
+		player:setStorageValue(Storage.DangerousDepths.Gnomes.LocationD, 0) -- Garantindo que a task não inicie com -1
+		player:setStorageValue(Storage.DangerousDepths.Gnomes.LocationE, 0) -- Garantindo que a task não inicie com -1
 		playerTopic[cid] = 1
 		npcHandler.topic[cid] = 1
 	end
@@ -136,13 +136,13 @@ local function creatureSayCallback(cid, type, msg)
 			if player:getStorageValue(Storage.DangerousDepths.Gnomes.CrawlersCount) >= 3 then
 				npcHandler:say({"AMAZING! Not only did you salve all our friends - you also rescued the animals! Here is your reward and bonus! ...",
 								"The other are already telling stories about you. Please return to me later if you want to help out some more!"}, cid)
-				player:setStorageValue(Storage.DangerousDepths.Gnomes.timeTaskOrdnance, os.time() + tempo)
+				player:setStorageValue(Storage.DangerousDepths.Gnomes.TimeTaskOrdnance, os.time() + tempo)
 				player:addItem(32014, 2)
 				player:setStorageValue(Storage.DangerousDepths.Gnomes.Status, player:getStorageValue(Storage.DangerousDepths.Gnomes.Status) + 2)
 				player:setStorageValue(Storage.DangerousDepths.Gnomes.Ordnance, 3)
 			else
 				npcHandler:say({"The other are already telling stories about you. Please return to me later if you want to help out some more!"}, cid)
-				player:setStorageValue(Storage.DangerousDepths.Gnomes.timeTaskOrdnance, os.time() + tempo)
+				player:setStorageValue(Storage.DangerousDepths.Gnomes.TimeTaskOrdnance, os.time() + tempo)
 				player:addItem(32014, 1)
 				player:setStorageValue(Storage.DangerousDepths.Gnomes.Status, player:getStorageValue(Storage.DangerousDepths.Gnomes.Status) + 1)
 				player:setStorageValue(Storage.DangerousDepths.Gnomes.Ordnance, 3)
@@ -200,7 +200,7 @@ local function creatureSayCallback(cid, type, msg)
 				player:setStorageValue(Storage.DangerousDepths.Gnomes.Status, player:getStorageValue(Storage.DangerousDepths.Gnomes.Status) + 1)
 			end
 			player:setStorageValue(Storage.DangerousDepths.Gnomes.Charting, 2)
-			player:setStorageValue(Storage.DangerousDepths.Gnomes.timeTaskCharting, os.time() + tempo)
+			player:setStorageValue(Storage.DangerousDepths.Gnomes.TimeTaskCharting, os.time() + tempo)
 			playerTopic[cid] = 1
 			npcHandler.topic[cid] = 1
 		end

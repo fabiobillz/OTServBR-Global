@@ -20,47 +20,48 @@ local voices = {
 	{ text = 'The pending freight from the saffron coasts is overdue.' }
 }
 
-local playerTopic = {}
 local function greetCallback(cid)
 	local player = Player(cid)
-	if player:getStorageValue(Storage.KilmareshQuest.First.Acesso) < 1 then
-		npcHandler:setMessage(MESSAGE_GREET, "How could I help you?") 
-		playerTopic[cid] = 1
-	elseif (player:getStorageValue(Storage.KilmareshQuest.First.jamesfrancisTask) >= 0 and 
-	player:getStorageValue(Storage.KilmareshQuest.First.jamesfrancisTask) <= 50)
-	and player:getStorageValue(Storage.KilmareshQuest.First.Mission) < 3 then
-		npcHandler:setMessage(MESSAGE_GREET, "How could I help you?") 
-		playerTopic[cid] = 15
-	elseif player:getStorageValue(Storage.KilmareshQuest.First.Mission) == 4 then
-		npcHandler:setMessage(MESSAGE_GREET, "How could I help you?") 
-		player:setStorageValue(Storage.KilmareshQuest.First.Mission, 5)
-		playerTopic[cid] = 20
+	if player:getStorageValue(Storage.Kilmaresh.First.Acesso) < 1 then
+		-- It needs to be revised, it's not the same as the global
+		npcHandler:setMessage(MESSAGE_GREET, "How could I help you?")
+		npcHandler.topic[cid] = 1
+	elseif (player:getStorageValue(Storage.Kilmaresh.First.JamesfrancisTask) >= 0 and player:getStorageValue(Storage.Kilmaresh.First.JamesfrancisTask) <= 50)
+	and player:getStorageValue(Storage.Kilmaresh.First.Mission) < 3 then
+		-- It needs to be revised, it's not the same as the global
+		npcHandler:setMessage(MESSAGE_GREET, "How could I help you?")
+		npcHandler.topic[cid] = 15
+	elseif player:getStorageValue(Storage.Kilmaresh.First.Mission) == 4 then
+		-- It needs to be revised, it's not the same as the global
+		npcHandler:setMessage(MESSAGE_GREET, "How could I help you?")
+		player:setStorageValue(Storage.Kilmaresh.First.Mission, 5)
+		npcHandler.topic[cid] = 20
 	end
 	npcHandler:addFocus(cid)
 	return true
-end 
+end
 
 local function creatureSayCallback(cid, type, msg)
-if not npcHandler:isFocused(cid) then
-	return false
-end
-npcHandler.topic[cid] = playerTopic[cid]
-local player = Player(cid)
-	if msgcontains(msg, "present") and 
-	player:getStorageValue(Storage.KilmareshQuest.Third.Recovering) == 2 and 
-	player:getItemById(36098, true) then
-		if player:getStorageValue(Storage.KilmareshQuest.Third.Recovering) == 2 then
+	if not npcHandler:isFocused(cid) then
+		return false
+	end
+
+	local player = Player(cid)
+	if msgcontains(msg, "present")
+	and player:getStorageValue(Storage.Kilmaresh.Third.Recovering) == 2
+	and player:getItemById(36098, true) then
+		if player:getStorageValue(Storage.Kilmaresh.Third.Recovering) == 2 then
 			player:removeItem(36098, 1)
-			player:setStorageValue(Storage.KilmareshQuest.Fourth.Moe, 1)
-			player:setStorageValue(Storage.KilmareshQuest.Third.Recovering, 3)
+			player:setStorageValue(Storage.Kilmaresh.Fourth.Moe, 1)
+			player:setStorageValue(Storage.Kilmaresh.Third.Recovering, 3)
 			npcHandler:say({"This is a very beautiful ring. Thank you for this generous present!"}, cid)
 			npcHandler.topic[cid] = 1
-			playerTopic[cid] = 1
 		else
 			npcHandler:say({"Didn't you bring my gift?"}, cid)
+			npcHandler.topic[cid] = 0
 		end
-end
-return true
+	end
+	return true
 end
 
 npcHandler:setMessage(MESSAGE_WALKAWAY, 'Well, bye then.')

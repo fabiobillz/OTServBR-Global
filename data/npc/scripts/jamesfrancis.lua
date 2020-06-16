@@ -23,7 +23,7 @@ local function greetCallback(cid)
 	if player:getStorageValue(Storage.CultsOfTibia.Minotaurs.Acesso) < 1 then
 		npcHandler:setMessage(MESSAGE_GREET, "Gerimor is right. As an expert for minotaurs I am researching these creatures for years. I thought I already knew a lot but the monsters in this cave are {different}. It's a big {mystery}.")
 		playerTopic[cid] = 1
-	elseif (player:getStorageValue(Storage.CultsOfTibia.Minotaurs.JamesFrancisTask) >= 0 and player:getStorageValue(Storage.CultsOfTibia.Minotaurs.JamesFrancisTask) <= 50)
+	elseif (player:getStorageValue(Storage.CultsOfTibia.Minotaurs.JamesfrancisTask) >= 0 and player:getStorageValue(Storage.CultsOfTibia.Minotaurs.JamesfrancisTask) <= 50)
 	and player:getStorageValue(Storage.CultsOfTibia.Minotaurs.Mission) < 3 then
 		npcHandler:setMessage(MESSAGE_GREET, "How is your {mission} going?")
 		playerTopic[cid] = 5
@@ -63,7 +63,7 @@ local function creatureSayCallback(cid, type, msg)
 	elseif msgcontains(msg, "yes") and npcHandler.topic[cid] == 3 then
 			npcHandler:say({"Very nice. Return to me if you've finished your job."}, cid)
 			player:setStorageValue(Storage.CultsOfTibia.Minotaurs.Mission, 2)
-			player:setStorageValue(Storage.CultsOfTibia.Minotaurs.JamesFrancisTask, 0)
+			player:setStorageValue(Storage.CultsOfTibia.Minotaurs.JamesfrancisTask, 0)
 			player:setStorageValue(Storage.CultsOfTibia.Minotaurs.EntranceAcess, 1)
 
 		if player:getStorageValue(Storage.CultsOfTibia.Questline) < 1 then
@@ -72,7 +72,7 @@ local function creatureSayCallback(cid, type, msg)
 
 	-- Entregando a quest
 	elseif msgcontains(msg, "mission") and npcHandler.topic[cid] == 5 then
-		if player:getStorageValue(Storage.CultsOfTibia.Minotaurs.JamesFrancisTask) >= 50 then
+		if player:getStorageValue(Storage.CultsOfTibia.Minotaurs.JamesfrancisTask) >= 50 then
 			npcHandler:say({"Great job! You have killed at least 50 of these monsters. I give this key to you to open the door to the inner area. Go there and find out what's going on."}, cid)
 			player:setStorageValue(Storage.CultsOfTibia.Minotaurs.Mission, 3)
 			player:setStorageValue(Storage.CultsOfTibia.Minotaurs.AcessDoor, 1)

@@ -59,10 +59,10 @@ local function creatureSayCallback(cid, type, msg)
 		player:addItem(2152, 20)
 end
 
-	if player:getStorageValue(Storage.WhatAFoolishQuest.Questline) == 35
-			and player:getStorageValue(Storage.WhatAFoolishQuest.ScaredKazzan) ~= 1
+	if player:getStorageValue(Storage.WhatAFoolish.Questline) == 35
+			and player:getStorageValue(Storage.WhatAFoolish.ScaredKazzan) ~= 1
 			and player:getOutfit().lookType == 65 then
-		player:setStorageValue(Storage.WhatAFoolishQuest.ScaredKazzan, 1)
+		player:setStorageValue(Storage.WhatAFoolish.ScaredKazzan, 1)
 		npcHandler:say('WAAAAAHHH!!!', cid)
 		return false
 	end
